@@ -1,5 +1,5 @@
 {
-    "name": "Unity.com.{{COMPANY}}.{{REPOSITORY_NAME}}",
+    "name": "Unity.com.common-games.tools.customizable-script-templates",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

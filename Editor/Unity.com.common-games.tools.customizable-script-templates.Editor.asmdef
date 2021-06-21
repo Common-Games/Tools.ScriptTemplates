@@ -1,5 +1,5 @@
 {
-    "name": "Unity.com.{{COMPANY}}.{{REPOSITORY_NAME}}.Editor",
+    "name": "Unity.com.common-games.tools.customizable-script-templates.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"
