@@ -1,0 +1,20 @@
+#if ODIN_INSPECTOR
+using MonoBehaviour = UnityEngine.MonoBehaviour;
+#else
+using MonoBehaviour = Sirenix.OdinInspector.SerializedMonoBehaviour;
+#endif
+
+using UnityEngine;
+
+	#ROOTNAMESPACEBEGIN#
+public sealed class #SCRIPTNAME# : MonoBehaviour
+{
+	#region Fields
+	#NOTRIM#
+	#endregion
+	
+	#region Methods
+	#NOTRIM#
+	#endregion
+}
+#ROOTNAMESPACEEND#
