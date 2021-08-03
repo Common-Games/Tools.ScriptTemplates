@@ -62,7 +62,7 @@ Open your project's `Packages/manifest.json` with your favorite text editor. Add
 {
   "dependencies": {
   },
-  "testables": [ "com.common-games.tools.customizable-script-templates" ]
+  "testables": [ "com.common-games.tools.custom-script-templates" ]
 }
 ```
 
