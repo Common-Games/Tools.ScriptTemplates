@@ -38,7 +38,7 @@ Thank you!
 
 # Requirements
 
-- **Unity 2020.2**
+- **Unity 2020.3**
 - The **Unity Test Framework** Package
 
 # Installation
