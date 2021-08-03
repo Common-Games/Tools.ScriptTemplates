@@ -1,0 +1,11 @@
+	#ROOTNAMESPACEBEGIN#
+public sealed class #SCRIPTNAME#
+{
+	#region Structors
+	public #SCRIPTNAME#()
+	{
+		#NOTRIM#
+	}
+	#endregion
+}
+#ROOTNAMESPACEEND#

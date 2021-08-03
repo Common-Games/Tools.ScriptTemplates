@@ -1,12 +1,15 @@
 {
-    "name": "Unity.com.common-games.tools.customizable-script-templates",
+    "name": "CGTK.Tools.CustomScriptTemplates.Generated",
+    "rootNamespace": "",
     "references": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
