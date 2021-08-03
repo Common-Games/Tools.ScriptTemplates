@@ -5,7 +5,10 @@
 [![Discord](https://img.shields.io/discord/763171539763462144?color=%237289DA&label=discord&logo=discord&style=for-the-badge)](https://discord.gg/S9wHQ96)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg?style=for-the-badge)
 
-Set of easy to use, explicit Singletons.
+Customize your available Script Templates.
+
+You can configure them per project and user, so each can have the script templates you like and adjust them to the needs of the project.
+
 <br>Part of the **CGTK** Framework for Unity.
 
 <!-- toc -->
