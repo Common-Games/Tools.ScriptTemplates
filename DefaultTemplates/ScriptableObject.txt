@@ -1,0 +1,14 @@
+#if ODIN_INSPECTOR
+using ScriptableObject = UnityEngine.ScriptableObject;
+#else
+using ScriptableObject = Sirenix.OdinInspector.SerializedScriptableObject;
+#endif
+
+using UnityEngine;
+
+	#ROOTNAMESPACEBEGIN#
+[CreateAssetMenu]
+public sealed class #SCRIPTNAME# : ScriptableObject
+{
+}
+#ROOTNAMESPACEEND#

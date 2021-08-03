@@ -1,0 +1,6 @@
+	#ROOTNAMESPACEBEGIN#
+public static class #SCRIPTNAME#
+{
+	
+}
+#ROOTNAMESPACEEND#
