@@ -1,18 +1,18 @@
 #if UNITY_EDITOR
-
 using System;
-using System.Collections.Generic;
 using System.IO;
-using CGTK.Utilities.Extensions;
+using System.Collections.Generic;
+
 using UnityEditor;
 using UnityEngine;
 
 using JetBrains.Annotations;
-using Sirenix.OdinInspector;
+
 #if ODIN_INSPECTOR
-using Sirenix.OdinInspector.Editor.Drawers;
 using Sirenix.Utilities.Editor;
 #endif
+
+using CGTK.Utilities.Extensions;
 
 namespace CGTK.Tools.CustomScriptTemplates
 {
