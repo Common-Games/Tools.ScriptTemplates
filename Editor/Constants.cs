@@ -11,7 +11,7 @@ namespace CGTK.Tools.CustomScriptTemplates
         public const String PACKAGE_GROUP   = "tools.";
         
         public const String PACKAGE_NAME    = PACKAGE_COMPANY + PACKAGE_GROUP + "custom-script-templates";
-        public const String PACKAGE_PATH      = "Packages/" + PACKAGE_NAME + "/";
+        public const String PACKAGE_PATH    = "Packages/" + PACKAGE_NAME + "/";
         
         public const String FOLDER_EDITOR    = PACKAGE_PATH + "Editor/";
         public const String FOLDER_GENERATED = PACKAGE_PATH + "_Generated/";
