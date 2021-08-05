@@ -1,3 +1,27 @@
 .idea/**
 .vs/**
 
+
+_Generated/Class.cs
+
+_Generated/Class_Static.cs
+
+_Generated/Class_Static.cs.meta
+
+_Generated/Class.cs.meta
+
+_Generated/Interface.cs
+
+_Generated/Interface.cs.meta
+
+_Generated/MonoBehaviour.cs
+
+_Generated/MonoBehaviour.cs.meta
+
+_Generated/ScriptableObject.cs
+
+_Generated/ScriptableObject.cs.meta
+
+_Generated/Struct.cs
+
+_Generated/Struct.cs.meta
