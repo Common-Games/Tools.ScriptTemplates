@@ -31,7 +31,7 @@ namespace CGTK.Tools.CustomScriptTemplates
 
         private const String _META =
             "fileFormatVersion: 2\n" +
-            "guid: 20570d736d80b9f43aa778aa2ec0dbff\n" +
+            "guid: #GUID#\n" +
             "MonoImporter:\n" +
             "externalObjects: {}\n" +
             "serializedVersion: 2\n" +
@@ -56,6 +56,7 @@ namespace CGTK.Tools.CustomScriptTemplates
         {
             DirectoryInfo __directory = new DirectoryInfo(path: Constants.FOLDER_GENERATED);
             __directory.RemoveFiles(fileExtensionToRemove: ".cs");
+            __directory.RemoveFiles(fileExtensionToRemove: ".cs.meta");
         }
         
         public static void CreateScript(in String name, in String folders, in String path)
@@ -66,25 +67,29 @@ namespace CGTK.Tools.CustomScriptTemplates
             __script = __script.Replace(oldValue: "#FOLDERS#", newValue: folders);
             __script = __script.Replace(oldValue: "#TEMPLATE_PATH#", newValue: path);
 
-            String __finalPath = Path.Combine(Constants.FOLDER_GENERATED, path2: $"{name}.cs");
+            String __filePath = Path.Combine(Constants.FOLDER_GENERATED, path2: $"{name}.cs");
       
-            File.WriteAllText(path: __finalPath, contents: __script, encoding: new UTF8Encoding(true));
+            File.WriteAllText(path: __filePath, contents: __script, encoding: new UTF8Encoding(true));
             
             CreateMeta(name);
             
-            AssetDatabase.ImportAsset(__finalPath);
+            AssetDatabase.ImportAsset(__filePath);
         }
         
+        /// <summary>
+        /// We need to generate them manually because we're creating the scripts in the Packages folders.
+        /// Unity does not generate .meta files for that folder, but it needs .meta's to actually recognize the scripts as being valid.
+        /// </summary>
         public static void CreateMeta(in String name)
         {
             String __meta = _META;
             
             __meta = __meta.Replace(oldValue: "#GUID#", newValue: Guid.NewGuid().ToString());
 
-            String __finalPath = Path.Combine(Constants.FOLDER_GENERATED, path2: $"{name}.cs.meta");
+            String __filePath = Path.Combine(Constants.FOLDER_GENERATED, path2: $"{name}.cs.meta");
       
-            File.WriteAllText(path: __finalPath, contents: __meta, encoding: new UTF8Encoding(true));
-            AssetDatabase.ImportAsset(__finalPath);
+            File.WriteAllText(path: __filePath, contents: __meta, encoding: new UTF8Encoding(true));
+            AssetDatabase.ImportAsset(__filePath);
         }
     }
 }
