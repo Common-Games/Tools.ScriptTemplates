@@ -93,7 +93,8 @@ namespace CGTK.Tools.CustomScriptTemplates
         {
             String __meta = _META;
             
-            __meta = __meta.Replace(oldValue: "#GUID#", newValue: Guid.NewGuid().ToString());
+			String __guid = Guid.NewGuid().ToString().Replace(oldChar: '-', newChar: '');			
+            __meta = __meta.Replace(oldValue: "#GUID#", newValue: __guid);
 
             String __filePath = Path.Combine(Constants.FOLDER_GENERATED, path2: $"{name}.cs.meta");
       
