@@ -31,31 +31,19 @@ namespace CGTK.Tools.CustomScriptTemplates
             internal
             set
             {
-                String __input = value;
-                
-                #if ODIN_INSPECTOR
-                if (UseRelativePath)
-                {
-                    //__input = Path.GetFullPath(path: value.IsNullOrEmpty() ? "Assets/" + value : value);
-                    __input = value.IsNullOrEmpty() ? $"Assets/{value}" : value;
-                }
-                else
-                {
-                    __input = Path.GetFullPath(__input);
-                }
-                #endif
-
-                if (__input.IsNullOrEmpty())
+                if (value.IsNullOrEmpty())
                 {
                     throw new ArgumentNullException(paramName: nameof(value));
                 }
 
-                if (Path.GetFullPath(__input).NotValidPath())
+                String __fullPath = Path.GetFullPath(value);
+                
+                if (__fullPath.NotValidDirectory())
                 {
-                    //throw new ArgumentException(message: "Templates Folder Path is not a valid Folder!");
+                    throw new ArgumentException(message: $"Templates Folder Path ({value} -> {__fullPath}) is not a valid Directory!");
                 }
                 
-                EditorPrefs.SetString(key: TemplatesFolderKey, __input);
+                EditorPrefs.SetString(key: TemplatesFolderKey, value);
             }
         }
         public static String DefaultTemplatesFolder =>
