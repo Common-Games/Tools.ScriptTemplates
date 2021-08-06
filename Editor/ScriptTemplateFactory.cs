@@ -13,6 +13,7 @@ namespace CGTK.Tools.CustomScriptTemplates
 {
     public static class ScriptTemplateFactory
     {
+        
         private const String _SCRIPT = 
             "#if UNITY_EDITOR \n" +
             "using UnityEditor; \n" +
@@ -43,6 +44,8 @@ namespace CGTK.Tools.CustomScriptTemplates
             "assetBundleVariant:";
 
         public static void CreateAll()
+
+        #region Methods
         {
             IEnumerable<(String folders, String name, String path)> __templates = Templates.Gather();
 
@@ -59,10 +62,13 @@ namespace CGTK.Tools.CustomScriptTemplates
             __directory.RemoveFiles(fileExtensionToRemove: ".cs.meta");
         }
         
-        public static void CreateScript(in String name, in String folders, in String path)
+        public static void CreateScript(String name, in String folders, in String path)
         {
-            String __script = _SCRIPT;
+            name = name.RemoveInvalidFileNameCharacters();
+            name = name.Replace(oldChar: ' ', newChar: '_');
             
+            String __script = _SCRIPT;
+
             __script = __script.Replace(oldValue: "#NAME#", newValue: name);
             __script = __script.Replace(oldValue: "#FOLDERS#", newValue: folders);
             __script = __script.Replace(oldValue: "#TEMPLATE_PATH#", newValue: path);
@@ -91,6 +97,8 @@ namespace CGTK.Tools.CustomScriptTemplates
             File.WriteAllText(path: __filePath, contents: __meta, encoding: new UTF8Encoding(true));
             AssetDatabase.ImportAsset(__filePath);
         }
+
+        #endregion
     }
 }
 
