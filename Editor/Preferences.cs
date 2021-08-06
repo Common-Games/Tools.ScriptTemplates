@@ -46,34 +46,9 @@ namespace CGTK.Tools.CustomScriptTemplates
                 EditorPrefs.SetString(key: TemplatesFolderKey, value);
             }
         }
-        public static String DefaultTemplatesFolder =>
-            #if ODIN_INSPECTOR
-            UseRelativePath ? Constants.DEFAULT_SCRIPT_TEMPLATES_FOLDER :
-            #endif
-            Path.GetFullPath(path: Constants.DEFAULT_SCRIPT_TEMPLATES_FOLDER);
+        public static String DefaultTemplatesFolder => Path.GetFullPath(path: Constants.DEFAULT_SCRIPT_TEMPLATES_FOLDER);
 
         public static void ResetTemplatesFolder() => TemplatesFolder = DefaultTemplatesFolder;
-
-        
-        #if ODIN_INSPECTOR //Not needed when not using ODIN
-        private static String RelativePathKey => $"{_EDITOR_PREFS_SCOPE}_use-relative-path";
-        //private static String ProjectRelativeDefaultValue = ""
-        [PublicAPI]
-        public static Boolean UseRelativePath
-        {
-            get => EditorPrefs.GetBool(key: RelativePathKey, defaultValue: false);
-
-            internal
-            set //TODO: Make Path Project Relative when switching to that, and vice versa.
-            {
-                EditorPrefs.SetBool(key: RelativePathKey, value);
-
-                TemplatesFolder = Path.GetFullPath(TemplatesFolder);
-            }
-        }
-        
-        public static Boolean UseAbsolutePath => !UseRelativePath;
-        #endif
     }
     
     public sealed class ScriptTemplatesSettingsProvider : SettingsProvider
@@ -84,20 +59,21 @@ namespace CGTK.Tools.CustomScriptTemplates
 
         public override void OnGUI(String searchContext)
         {
-            #if ODIN_INSPECTOR
-            //Preferences.UseRelativePath = EditorGUILayout.Toggle(label: new GUIContent(text: "Project Relative Folder"), value: Preferences.UseRelativePath);
+            const String __LABEL = "Script Templates Folder";
             
             EditorGUILayout.BeginHorizontal();
-            Preferences.TemplatesFolder = SirenixEditorFields.FolderPathField(label: new GUIContent(text: "Script Templates Folder"), path: Preferences.TemplatesFolder, parentPath: "Assets", absolutePath: Preferences.UseAbsolutePath, useBackslashes: false);
+            #if ODIN_INSPECTOR
+            Preferences.TemplatesFolder = SirenixEditorFields.FolderPathField(label: new GUIContent(text: __LABEL), path: Preferences.TemplatesFolder, parentPath: "Assets", absolutePath: true, useBackslashes: false);
+            #else
+            Preferences.TemplatesFolder = EditorGUILayout.TextField(label: __LABEL, text: Preferences.TemplatesFolder);
+            #endif
             if (GUILayout.Button(text: "Reset", options: GUILayout.Width(80)))
             {
                 Preferences.TemplatesFolder = Preferences.DefaultTemplatesFolder;
             }
             EditorGUILayout.EndHorizontal();
-            #else
-            Preferences.TemplatesFolder = EditorGUILayout.TextField(label: "Script Templates Folder", text: Preferences.TemplatesFolder);
-            #endif
             
+            EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button(text: "Regenerate Templates"))
             {
                 ScriptTemplateFactory.RemoveAll();
@@ -108,6 +84,7 @@ namespace CGTK.Tools.CustomScriptTemplates
             {
                 ScriptTemplateFactory.RemoveAll();
             }
+            EditorGUILayout.EndHorizontal();
         }
 
         [SettingsProvider]
