@@ -11,7 +11,7 @@ using CGTK.Utilities.Extensions;
 
 namespace CGTK.Tools.CustomScriptTemplates
 {
-    public static class ScriptTemplateFactory
+    internal static class ScriptTemplateFactory
     {
         #region Fields
         
@@ -57,15 +57,15 @@ namespace CGTK.Tools.CustomScriptTemplates
                 CreateScript(name: __name, folders: __folders.ToUnityFormatting(), path: __path);
             }
         }
-
+        
         public static void Reset()
         {
             DirectoryInfo __directory = new DirectoryInfo(path: Constants.FOLDER_GENERATED);
             __directory.RemoveFiles(fileExtensionToRemove: ".cs");
             __directory.RemoveFiles(fileExtensionToRemove: ".cs.meta");
         }
-        
-        public static void CreateScript(String name, in String folders, in String path)
+
+        private static void CreateScript(String name, in String folders, in String path)
         {
             name = name.MakeValidScriptName();
             
@@ -88,7 +88,7 @@ namespace CGTK.Tools.CustomScriptTemplates
         /// We need to generate them manually because we're creating the scripts in the Packages folders.
         /// Unity does not generate .meta files for that folder, but it needs .meta's to actually recognize the scripts as being valid.
         /// </summary>
-        public static void CreateMeta(in String name)
+        private static void CreateMeta(in String name)
         {
             String __meta = _META;
             

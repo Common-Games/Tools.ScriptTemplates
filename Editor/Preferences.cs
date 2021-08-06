@@ -17,7 +17,7 @@ using CGTK.Utilities.Extensions;
 namespace CGTK.Tools.CustomScriptTemplates
 {
     [Serializable]
-    public static class Preferences
+    internal static class Preferences
     {
         private const String _EDITOR_PREFS_SCOPE = Constants.PACKAGE_NAME;
         
