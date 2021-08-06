@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
 
 using System;
 using System.IO;
@@ -20,17 +20,11 @@ namespace CGTK.Tools.CustomScriptTemplates
 			
 			if (__templatesFolder.IsNullOrEmpty()) throw new NullReferenceException(message: nameof(__templatesFolder));
 
-			#if ODIN_INSPECTOR
-			if (Preferences.UseRelativePath)
-			{
-				__templatesFolder = Path.GetFullPath(path: Path.Combine(Application.dataPath, __templatesFolder));
-			}
-			#endif
-
 			if (!Directory.Exists(__templatesFolder))
 			{
-				throw new DirectoryNotFoundException(message: nameof(__templatesFolder));
+				throw new DirectoryNotFoundException(message: $"{nameof(__templatesFolder)}: {__templatesFolder}");
 			}
+			
 			String[] __filePaths = Directory.GetFiles(path: __templatesFolder, searchPattern: "*.txt", SearchOption.AllDirectories);
 
 			List<(String folders, String name, String path)> __result = new List<(String folders, String name, String path)>(__filePaths.Length);
@@ -71,4 +65,4 @@ namespace CGTK.Tools.CustomScriptTemplates
 	}
     
 }
-#endif
+//#endif

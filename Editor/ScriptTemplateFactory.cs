@@ -1,5 +1,4 @@
-#if UNITY_EDITOR
-
+//#if UNITY_EDITOR
 using System;
 using System.IO;
 using System.Text;
@@ -11,8 +10,10 @@ using CGTK.Utilities.Extensions;
 
 namespace CGTK.Tools.CustomScriptTemplates
 {
-    public static class ScriptTemplateFactory
+    internal static class ScriptTemplateFactory
     {
+        #region Fields
+        
         private const String _SCRIPT = 
             "#if UNITY_EDITOR \n" +
             "using UnityEditor; \n" +
@@ -41,8 +42,13 @@ namespace CGTK.Tools.CustomScriptTemplates
             "userData:\n" +
             "assetBundleName:\n" +
             "assetBundleVariant:";
+        
+        #endregion
 
-        public static void CreateAll()
+        #region Methods
+        
+        [MenuItem(itemName: "Tools/CGTK/Script Templates/Regenerate")]
+        public static void Regenerate()
         {
             IEnumerable<(String folders, String name, String path)> __templates = Templates.Gather();
 
@@ -51,18 +57,21 @@ namespace CGTK.Tools.CustomScriptTemplates
                 CreateScript(name: __name, folders: __folders.ToUnityFormatting(), path: __path);
             }
         }
-
-        public static void RemoveAll()
+        
+        [MenuItem(itemName: "Tools/CGTK/Script Templates/Reset")]
+        public static void Reset()
         {
             DirectoryInfo __directory = new DirectoryInfo(path: Constants.FOLDER_GENERATED);
             __directory.RemoveFiles(fileExtensionToRemove: ".cs");
             __directory.RemoveFiles(fileExtensionToRemove: ".cs.meta");
         }
-        
-        public static void CreateScript(in String name, in String folders, in String path)
+
+        private static void CreateScript(String name, in String folders, in String path)
         {
-            String __script = _SCRIPT;
+            name = name.MakeValidScriptName();
             
+            String __script = _SCRIPT;
+
             __script = __script.Replace(oldValue: "#NAME#", newValue: name);
             __script = __script.Replace(oldValue: "#FOLDERS#", newValue: folders);
             __script = __script.Replace(oldValue: "#TEMPLATE_PATH#", newValue: path);
@@ -80,7 +89,7 @@ namespace CGTK.Tools.CustomScriptTemplates
         /// We need to generate them manually because we're creating the scripts in the Packages folders.
         /// Unity does not generate .meta files for that folder, but it needs .meta's to actually recognize the scripts as being valid.
         /// </summary>
-        public static void CreateMeta(in String name)
+        private static void CreateMeta(in String name)
         {
             String __meta = _META;
             
@@ -91,7 +100,8 @@ namespace CGTK.Tools.CustomScriptTemplates
             File.WriteAllText(path: __filePath, contents: __meta, encoding: new UTF8Encoding(true));
             AssetDatabase.ImportAsset(__filePath);
         }
+
+        #endregion
     }
 }
-
-#endif
+//#endif
