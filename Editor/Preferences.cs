@@ -23,6 +23,8 @@ namespace CGTK.Tools.CustomScriptTemplates
         
         private static String TemplatesFolderKey => $"{_EDITOR_PREFS_SCOPE}_templates-folder-path";
         
+        //TODO: Red icon or text if the path is invalid. (check on set)
+        
         [PublicAPI]
         public static String TemplatesFolder
         {
@@ -33,14 +35,16 @@ namespace CGTK.Tools.CustomScriptTemplates
             {
                 if (value.IsNullOrEmpty())
                 {
-                    throw new ArgumentNullException(paramName: nameof(value));
+                    //throw new ArgumentNullException(paramName: nameof(value)); //Had to comment out because if you throw an exception the editor won't show.
+                    Debug.LogError(message: $"Argument Null: {nameof(value)}");
                 }
 
                 String __fullPath = Path.GetFullPath(value);
                 
                 if (__fullPath.NotValidDirectory())
                 {
-                    throw new ArgumentException(message: $"Templates Folder Path ({value} -> {__fullPath}) is not a valid Directory!");
+                    //throw new ArgumentException(message: $"Templates Folder Path ({value} -> {__fullPath}) is not a valid Directory!"); //Had to comment out because if you throw an exception the editor won't show.
+                    Debug.LogError(message: $"Templates Folder Path ({value} -> {__fullPath}) is not a valid Directory!");
                 }
                 
                 EditorPrefs.SetString(key: TemplatesFolderKey, value);
