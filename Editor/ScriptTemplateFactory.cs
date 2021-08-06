@@ -48,6 +48,7 @@ namespace CGTK.Tools.CustomScriptTemplates
 
         #region Methods
         
+        [MenuItem(itemName: "Tools/CGTK/Script Templates/Regenerate")]
         public static void Regenerate()
         {
             IEnumerable<(String folders, String name, String path)> __templates = Templates.Gather();
@@ -58,6 +59,7 @@ namespace CGTK.Tools.CustomScriptTemplates
             }
         }
         
+        [MenuItem(itemName: "Tools/CGTK/Script Templates/Reset")]
         public static void Reset()
         {
             DirectoryInfo __directory = new DirectoryInfo(path: Constants.FOLDER_GENERATED);
