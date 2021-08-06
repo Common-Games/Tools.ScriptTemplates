@@ -1,3 +1,4 @@
+
 	#ROOTNAMESPACEBEGIN#
 public interface #SCRIPTNAME#
 {
