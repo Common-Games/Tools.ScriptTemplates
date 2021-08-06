@@ -1,7 +1,7 @@
 {
   "name": "com.common-games.tools.custom-script-templates",
   "displayName": "CGTK.Tools.CustomScriptTemplates",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "unity": "2020.3",
   "description": "Allows you to set-up custom templates for different kinds of scripts.",
   "keywords": [

@@ -1,0 +1,39 @@
+#if UNITY_EDITOR
+using UnityEngine;
+using UnityEditor;
+
+#if ODIN_INSPECTOR
+using Editor = Sirenix.OdinInspector.Editor.OdinEditor;
+#else
+using Editor = UnityEditor.Editor;
+#endif
+
+//IMPORTANT Search for TARGET_TYPE then replace all with the type you want to inspect.
+
+	#ROOTNAMESPACEBEGIN#
+
+[CustomEditor(inspectedType: typeof(TARGET_TYPE))]
+[CanEditMultipleObjects]
+public sealed class #SCRIPTNAME# : Editor 
+{
+	private TARGET_TYPE _inspected;
+
+	#if !ODIN_INSPECTOR
+	protected void OnEnable()
+	{
+	#else
+	protected override void OnEnable()
+	{
+		base.OnEnable();	
+	#endif
+	
+		_inspected = this.target as TARGET_TYPE;
+	}
+
+	public override void OnInspectorGUI()
+	{
+		#NOTRIM#
+	}
+}
+#ROOTNAMESPACEEND#
+#endif

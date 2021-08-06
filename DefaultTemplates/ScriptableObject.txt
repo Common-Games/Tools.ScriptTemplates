@@ -1,7 +1,7 @@
 #if ODIN_INSPECTOR
-using ScriptableObject = UnityEngine.ScriptableObject;
-#else
 using ScriptableObject = Sirenix.OdinInspector.SerializedScriptableObject;
+#else
+using ScriptableObject = UnityEngine.ScriptableObject;
 #endif
 
 using UnityEngine;
@@ -10,5 +10,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public sealed class #SCRIPTNAME# : ScriptableObject
 {
+	#NOTRIM#
 }
 #ROOTNAMESPACEEND#

@@ -1,7 +1,7 @@
 #if ODIN_INSPECTOR
-using MonoBehaviour = UnityEngine.MonoBehaviour;
-#else
 using MonoBehaviour = Sirenix.OdinInspector.SerializedMonoBehaviour;
+#else
+using MonoBehaviour = UnityEngine.MonoBehaviour;
 #endif
 
 using UnityEngine;
