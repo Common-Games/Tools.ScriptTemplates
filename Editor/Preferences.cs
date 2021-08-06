@@ -93,7 +93,7 @@ namespace CGTK.Tools.CustomScriptTemplates
 
         [SettingsProvider]
         public static SettingsProvider Create() 
-            => new ScriptTemplatesSettingsProvider(path: Constants.PREFERENCE_PATH, scopes: SettingsScope.User);
+            => new ScriptTemplatesSettingsProvider(path: Constants.PREFERENCE_PATH, scopes: SettingsScope.Project);
     }
 }
 //#endif
