@@ -28,7 +28,7 @@ namespace CGTK.Tools.CustomScriptTemplates
         [PublicAPI]
         public static String TemplatesFolder
         {
-            get => EditorPrefs.GetString(key: TemplatesFolderKey, defaultValue: DefaultTemplatesFolder).AppendDirectorySeparator();
+            get => PlayerPrefs.GetString(key: TemplatesFolderKey, defaultValue: DefaultTemplatesFolder).AppendDirectorySeparator();
 
             internal
             set
@@ -37,6 +37,7 @@ namespace CGTK.Tools.CustomScriptTemplates
                 {
                     //throw new ArgumentNullException(paramName: nameof(value)); //Had to comment out because if you throw an exception the editor won't show.
                     Debug.LogError(message: $"Argument Null: {nameof(value)}");
+                    return;
                 }
 
                 String __fullPath = Path.GetFullPath(value);
@@ -45,9 +46,10 @@ namespace CGTK.Tools.CustomScriptTemplates
                 {
                     //throw new ArgumentException(message: $"Templates Folder Path ({value} -> {__fullPath}) is not a valid Directory!"); //Had to comment out because if you throw an exception the editor won't show.
                     Debug.LogError(message: $"Templates Folder Path ({value} -> {__fullPath}) is not a valid Directory!");
+                    return;
                 }
                 
-                EditorPrefs.SetString(key: TemplatesFolderKey, value);
+                PlayerPrefs.SetString(key: TemplatesFolderKey, value);
             }
         }
         public static String DefaultTemplatesFolder => Path.GetFullPath(path: Constants.DEFAULT_SCRIPT_TEMPLATES_FOLDER);
@@ -93,7 +95,7 @@ namespace CGTK.Tools.CustomScriptTemplates
 
         [SettingsProvider]
         public static SettingsProvider Create() 
-            => new ScriptTemplatesSettingsProvider(path: Constants.PREFERENCE_PATH, scopes: SettingsScope.Project);
+            => new ScriptTemplatesSettingsProvider(path: Constants.PREFERENCE_PATH, scopes: SettingsScope.User);
     }
 }
 //#endif
