@@ -76,13 +76,13 @@ namespace CGTK.Tools.CustomScriptTemplates
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button(text: "Regenerate Templates"))
             {
-                ScriptTemplateFactory.RemoveAll();
-                ScriptTemplateFactory.CreateAll();    
+                ScriptTemplateFactory.Reset();
+                ScriptTemplateFactory.Regenerate();    
             }
             
             if (GUILayout.Button(text: "Reset Templates"))
             {
-                ScriptTemplateFactory.RemoveAll();
+                ScriptTemplateFactory.Reset();
             }
             EditorGUILayout.EndHorizontal();
         }

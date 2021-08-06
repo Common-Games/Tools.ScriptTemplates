@@ -13,6 +13,7 @@ namespace CGTK.Tools.CustomScriptTemplates
 {
     public static class ScriptTemplateFactory
     {
+        #region Fields
         
         private const String _SCRIPT = 
             "#if UNITY_EDITOR \n" +
@@ -42,10 +43,12 @@ namespace CGTK.Tools.CustomScriptTemplates
             "userData:\n" +
             "assetBundleName:\n" +
             "assetBundleVariant:";
-
-        public static void CreateAll()
+        
+        #endregion
 
         #region Methods
+        
+        public static void Regenerate()
         {
             IEnumerable<(String folders, String name, String path)> __templates = Templates.Gather();
 
@@ -55,7 +58,7 @@ namespace CGTK.Tools.CustomScriptTemplates
             }
         }
 
-        public static void RemoveAll()
+        public static void Reset()
         {
             DirectoryInfo __directory = new DirectoryInfo(path: Constants.FOLDER_GENERATED);
             __directory.RemoveFiles(fileExtensionToRemove: ".cs");
