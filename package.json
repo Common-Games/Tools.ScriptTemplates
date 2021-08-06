@@ -1,7 +1,7 @@
 {
   "name": "com.common-games.tools.custom-script-templates",
   "displayName": "CGTK.Tools.CustomScriptTemplates",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "unity": "2020.3",
   "description": "Allows you to set-up custom templates for different kinds of scripts.",
   "keywords": [
@@ -24,5 +24,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "tool"
+  "type": "tools"
 }

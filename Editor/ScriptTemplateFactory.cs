@@ -1,5 +1,4 @@
-#if UNITY_EDITOR
-
+//#if UNITY_EDITOR
 using System;
 using System.IO;
 using System.Text;
@@ -105,5 +104,4 @@ namespace CGTK.Tools.CustomScriptTemplates
         #endregion
     }
 }
-
-#endif
+//#endif
