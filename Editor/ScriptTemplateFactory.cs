@@ -64,8 +64,7 @@ namespace CGTK.Tools.CustomScriptTemplates
         
         public static void CreateScript(String name, in String folders, in String path)
         {
-            name = name.RemoveInvalidFileNameCharacters();
-            name = name.Replace(oldChar: ' ', newChar: '_');
+            name = name.MakeValidScriptName();
             
             String __script = _SCRIPT;
 
