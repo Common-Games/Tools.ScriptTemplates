@@ -9,7 +9,7 @@ using UnityEngine;
 
 using CGTK.Utilities.Extensions;
 
-[assembly: InternalsVisibleTo(assemblyName: CGTK.Tools.CustomScriptTemplates.Constants.TEST_ASSEMBLY)]
+[assembly: InternalsVisibleTo(assemblyName: CGTK.Tools.CustomScriptTemplates.PackageConstants.TEST_ASSEMBLY)]
 namespace CGTK.Tools.CustomScriptTemplates
 {
 	internal static partial class Templates

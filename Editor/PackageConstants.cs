@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 namespace CGTK.Tools.CustomScriptTemplates
 {
     [PublicAPI]
-    internal static class Constants
+    internal static class PackageConstants
     {
         public const String PACKAGE_COMPANY = "com.common-games.";
         public const String PACKAGE_GROUP   = "tools.";

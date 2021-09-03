@@ -61,7 +61,7 @@ namespace CGTK.Tools.CustomScriptTemplates
         [MenuItem(itemName: "Tools/CGTK/Script Templates/Reset")]
         public static void Reset()
         {
-            DirectoryInfo __directory = new DirectoryInfo(path: Constants.FOLDER_GENERATED);
+            DirectoryInfo __directory = new DirectoryInfo(path: PackageConstants.FOLDER_GENERATED);
             __directory.RemoveFiles(fileExtensionToRemove: ".cs");
             __directory.RemoveFiles(fileExtensionToRemove: ".cs.meta");
         }
@@ -76,7 +76,7 @@ namespace CGTK.Tools.CustomScriptTemplates
             __script = __script.Replace(oldValue: "#FOLDERS#", newValue: folders);
             __script = __script.Replace(oldValue: "#TEMPLATE_PATH#", newValue: path);
 
-            String __filePath = Path.Combine(Constants.FOLDER_GENERATED, path2: $"{name}.cs");
+            String __filePath = Path.Combine(PackageConstants.FOLDER_GENERATED, path2: $"{name}.cs");
       
             File.WriteAllText(path: __filePath, contents: __script, encoding: new UTF8Encoding(true));
             
@@ -96,7 +96,7 @@ namespace CGTK.Tools.CustomScriptTemplates
 			String __guid = Guid.NewGuid().ToString().Replace("-", String.Empty);	
             __meta = __meta.Replace(oldValue: "#GUID#", newValue: __guid);
 
-            String __filePath = Path.Combine(Constants.FOLDER_GENERATED, path2: $"{name}.cs.meta");
+            String __filePath = Path.Combine(PackageConstants.FOLDER_GENERATED, path2: $"{name}.cs.meta");
       
             File.WriteAllText(path: __filePath, contents: __meta, encoding: new UTF8Encoding(true));
             AssetDatabase.ImportAsset(__filePath);

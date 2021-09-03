@@ -19,7 +19,7 @@ namespace CGTK.Tools.CustomScriptTemplates
     [Serializable]
     internal static class Preferences
     {
-        private const String _EDITOR_PREFS_SCOPE = Constants.PACKAGE_NAME;
+        private const String _EDITOR_PREFS_SCOPE = PackageConstants.PACKAGE_NAME;
         
         private static String TemplatesFolderKey => $"{_EDITOR_PREFS_SCOPE}_templates-folder-path";
         
@@ -52,7 +52,7 @@ namespace CGTK.Tools.CustomScriptTemplates
                 PlayerPrefs.SetString(key: TemplatesFolderKey, value);
             }
         }
-        public static String DefaultTemplatesFolder => Path.GetFullPath(path: Constants.DEFAULT_SCRIPT_TEMPLATES_FOLDER);
+        public static String DefaultTemplatesFolder => Path.GetFullPath(path: PackageConstants.DEFAULT_SCRIPT_TEMPLATES_FOLDER);
 
         public static void ResetTemplatesFolder() => TemplatesFolder = DefaultTemplatesFolder;
     }
