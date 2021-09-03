@@ -62,40 +62,53 @@ namespace CGTK.Tools.CustomScriptTemplates
         [PublicAPI]
         public ScriptTemplatesSettingsProvider(in String path, in SettingsScope scopes, in IEnumerable<String> keywords = null) : base(path, scopes, keywords)
         { }
+        
+        private static readonly GUIStyle ButtonStyle = new GUIStyle(GUI.skin.button)
+        {
+            fixedHeight = 18,
+            fixedWidth  = 18,
+            padding = new RectOffset(left: 0, right: 0, top: 0, bottom: 0)
+        };
 
         public override void OnGUI(String searchContext)
         {
             const String __LABEL = "Script Templates Folder";
             
             EditorGUILayout.BeginHorizontal();
-            #if ODIN_INSPECTOR
-            Preferences.TemplatesFolder = SirenixEditorFields.FolderPathField(label: new GUIContent(text: __LABEL), path: Preferences.TemplatesFolder, parentPath: "Assets", absolutePath: true, useBackslashes: false);
-            #else
-            Preferences.TemplatesFolder = EditorGUILayout.TextField(label: __LABEL, text: Preferences.TemplatesFolder);
-            #endif
-            if (GUILayout.Button(text: "Reset", options: GUILayout.Width(80)))
             {
-                Preferences.TemplatesFolder = Preferences.DefaultTemplatesFolder;
+                #if ODIN_INSPECTOR
+                Preferences.TemplatesFolder = SirenixEditorFields.FolderPathField(label: new GUIContent(text: __LABEL),
+                    path: Preferences.TemplatesFolder, parentPath: "Assets", absolutePath: true, useBackslashes: false);
+                #else
+                Preferences.TemplatesFolder = EditorGUILayout.TextField(label: __LABEL, text: Preferences.TemplatesFolder);
+                #endif
+                
+                if (GUILayout.Button(content: EditorGUIUtility.IconContent(name: "d_Refresh", text: "Reset"), ButtonStyle))
+                {
+                    Preferences.TemplatesFolder = Preferences.DefaultTemplatesFolder;
+                }
             }
             EditorGUILayout.EndHorizontal();
-            
+
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button(text: "Regenerate Templates"))
             {
-                ScriptTemplateFactory.Reset();
-                ScriptTemplateFactory.Regenerate();    
-            }
-            
-            if (GUILayout.Button(text: "Reset Templates"))
-            {
-                ScriptTemplateFactory.Reset();
+                if (GUILayout.Button(text: "Regenerate Templates"))
+                {
+                    ScriptTemplateFactory.Reset();
+                    ScriptTemplateFactory.Regenerate();
+                }
+
+                if (GUILayout.Button(text: "Reset Templates"))
+                {
+                    ScriptTemplateFactory.Reset();
+                }
             }
             EditorGUILayout.EndHorizontal();
         }
 
         [SettingsProvider]
         public static SettingsProvider Create() 
-            => new ScriptTemplatesSettingsProvider(path: Constants.PREFERENCE_PATH, scopes: SettingsScope.User);
+            => new ScriptTemplatesSettingsProvider(path: PackageConstants.PREFERENCE_PATH, scopes: SettingsScope.User);
     }
 }
 //#endif
