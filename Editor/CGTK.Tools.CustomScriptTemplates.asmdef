@@ -1,8 +1,8 @@
 {
-    "name": "CGTK.Tools.CustomScriptTemplates.Editor",
+    "name": "CGTK.Tools.CustomScriptTemplates",
     "rootNamespace": "CGTK.Tools.CustomScriptTemplates",
     "references": [
-        "CGTK.Utilities.Extensions.Runtime"
+        "CGTK.Utils.Extensions"
     ],
     "includePlatforms": [
         "Editor"

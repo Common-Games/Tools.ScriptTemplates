@@ -12,14 +12,14 @@ using JetBrains.Annotations;
 using Sirenix.Utilities.Editor;
 #endif
 
-using CGTK.Utilities.Extensions;
+using CGTK.Utils.Extensions;
 
 namespace CGTK.Tools.CustomScriptTemplates
 {
     [Serializable]
     internal static class Preferences
     {
-        private const String _EDITOR_PREFS_SCOPE = Constants.PACKAGE_NAME;
+        private const String _EDITOR_PREFS_SCOPE = PackageConstants.PACKAGE_NAME;
         
         private static String TemplatesFolderKey => $"{_EDITOR_PREFS_SCOPE}_templates-folder-path";
         
@@ -52,7 +52,7 @@ namespace CGTK.Tools.CustomScriptTemplates
                 PlayerPrefs.SetString(key: TemplatesFolderKey, value);
             }
         }
-        public static String DefaultTemplatesFolder => Path.GetFullPath(path: Constants.DEFAULT_SCRIPT_TEMPLATES_FOLDER);
+        public static String DefaultTemplatesFolder => Path.GetFullPath(path: PackageConstants.DEFAULT_SCRIPT_TEMPLATES_FOLDER);
 
         public static void ResetTemplatesFolder() => TemplatesFolder = DefaultTemplatesFolder;
     }
@@ -62,40 +62,53 @@ namespace CGTK.Tools.CustomScriptTemplates
         [PublicAPI]
         public ScriptTemplatesSettingsProvider(in String path, in SettingsScope scopes, in IEnumerable<String> keywords = null) : base(path, scopes, keywords)
         { }
+        
+        private static readonly GUIStyle ButtonStyle = new GUIStyle(GUI.skin.button)
+        {
+            fixedHeight = 18,
+            fixedWidth  = 18,
+            padding = new RectOffset(left: 0, right: 0, top: 0, bottom: 0)
+        };
 
         public override void OnGUI(String searchContext)
         {
             const String __LABEL = "Script Templates Folder";
             
             EditorGUILayout.BeginHorizontal();
-            #if ODIN_INSPECTOR
-            Preferences.TemplatesFolder = SirenixEditorFields.FolderPathField(label: new GUIContent(text: __LABEL), path: Preferences.TemplatesFolder, parentPath: "Assets", absolutePath: true, useBackslashes: false);
-            #else
-            Preferences.TemplatesFolder = EditorGUILayout.TextField(label: __LABEL, text: Preferences.TemplatesFolder);
-            #endif
-            if (GUILayout.Button(text: "Reset", options: GUILayout.Width(80)))
             {
-                Preferences.TemplatesFolder = Preferences.DefaultTemplatesFolder;
+                #if ODIN_INSPECTOR
+                Preferences.TemplatesFolder = SirenixEditorFields.FolderPathField(label: new GUIContent(text: __LABEL),
+                    path: Preferences.TemplatesFolder, parentPath: "Assets", absolutePath: true, useBackslashes: false);
+                #else
+                Preferences.TemplatesFolder = EditorGUILayout.TextField(label: __LABEL, text: Preferences.TemplatesFolder);
+                #endif
+                
+                if (GUILayout.Button(content: EditorGUIUtility.IconContent(name: "d_Refresh", text: "Reset"), ButtonStyle))
+                {
+                    Preferences.TemplatesFolder = Preferences.DefaultTemplatesFolder;
+                }
             }
             EditorGUILayout.EndHorizontal();
-            
+
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button(text: "Regenerate Templates"))
             {
-                ScriptTemplateFactory.Reset();
-                ScriptTemplateFactory.Regenerate();    
-            }
-            
-            if (GUILayout.Button(text: "Reset Templates"))
-            {
-                ScriptTemplateFactory.Reset();
+                if (GUILayout.Button(text: "Regenerate Templates"))
+                {
+                    ScriptTemplateFactory.Reset();
+                    ScriptTemplateFactory.Regenerate();
+                }
+
+                if (GUILayout.Button(text: "Reset Templates"))
+                {
+                    ScriptTemplateFactory.Reset();
+                }
             }
             EditorGUILayout.EndHorizontal();
         }
 
         [SettingsProvider]
         public static SettingsProvider Create() 
-            => new ScriptTemplatesSettingsProvider(path: Constants.PREFERENCE_PATH, scopes: SettingsScope.User);
+            => new ScriptTemplatesSettingsProvider(path: PackageConstants.PREFERENCE_PATH, scopes: SettingsScope.User);
     }
 }
 //#endif
