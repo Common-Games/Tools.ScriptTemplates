@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 using UnityEditor;
 
-using CGTK.Utilities.Extensions;
+using CGTK.Utils.Extensions;
 
 namespace CGTK.Tools.CustomScriptTemplates
 {

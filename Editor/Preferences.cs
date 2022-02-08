@@ -12,7 +12,7 @@ using JetBrains.Annotations;
 using Sirenix.Utilities.Editor;
 #endif
 
-using CGTK.Utilities.Extensions;
+using CGTK.Utils.Extensions;
 
 namespace CGTK.Tools.CustomScriptTemplates
 {

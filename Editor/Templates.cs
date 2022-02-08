@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 using UnityEngine;
 
-using CGTK.Utilities.Extensions;
+using CGTK.Utils.Extensions;
 
 [assembly: InternalsVisibleTo(assemblyName: CGTK.Tools.CustomScriptTemplates.PackageConstants.TEST_ASSEMBLY)]
 namespace CGTK.Tools.CustomScriptTemplates

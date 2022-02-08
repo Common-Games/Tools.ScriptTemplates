@@ -20,6 +20,6 @@ namespace CGTK.Tools.CustomScriptTemplates
         
         public const String PREFERENCE_PATH = "Preferences/CGTK/Tools/Custom Script Templates";
 
-        public const String TEST_ASSEMBLY = "CGTK.Tools.CustomScriptTemplates.Tests";
+        public const String TEST_ASSEMBLY   = "CGTK.Tools.CustomScriptTemplates.Tests";
     }
 }
